@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+        .container {
+          display: flex;
+          align-items: flex-start;
+          gap: 40px; /* Increased gap between the image and the content */
+          padding: 20px; /* Optional: Adds padding around the container */
+        }
+  
+        .section__pic-container {
+          flex-shrink: 0;
+          /* Optionally, you can add margin here for more control */
+          margin-right: 40px; /* Adjust the value as needed */
+        }
+  
+        .section__pic-container img {
+          max-width: 100%;
+          height: auto;
+        }
+  
+        .section_text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+  
+        .btn-container {
+          margin-top: 10px;
+        }
+  
+        #socials-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 10px;
+        }
+  
+        #socials-container .icon {
+          width: 24px;
+          height: 24px;
+        }
+  
+        #socials-container p {
+          margin: 0;
+        }
+  
+        #socials-container a {
+          text-decoration: none;
+          color: inherit;
+        }
+  
+        .section_text_p1,
+        .title,
+        .section_text_p2 {
+          margin: 0;
+        }
+  
+        #skills-container {
+          margin-top: 20px;
+        }
+  
+        #skills-container ul {
+          list-style-type: none;
+          padding: 0;
+        }
+  
+        #skills-container li {
+          margin: 5px 0;
+          font-weight: bold;
+        }
+        /* Container for pagination */
+        .pagination {
+          display: flex;
+          justify-content: center; /* Centers the pagination */
+          padding: 20px; /* Adds padding around the pagination */
+          list-style-type: none; /* Removes default list styling */
+        }
+  
+        /* Individual pagination items */
+        .pagination li {
+          margin: 0 5px; /* Adds margin between pagination items */
+        }
+  
+        /* Links within pagination items */
+        .pagination a {
+          display: block;
+          padding: 10px 15px; /* Adds padding inside the pagination links */
+          color: #007bff; /* Sets the text color */
+          text-decoration: none; /* Removes underline from links */
+          border: 1px solid #dee2e6; /* Adds border to links */
+          border-radius: 4px; /* Rounds the corners of the links */
+        }
+  
+        /* Hover effect for pagination links */
+        .pagination a:hover {
+          background-color: #e9ecef; /* Changes background color on hover */
+          color: #0056b3; /* Changes text color on hover */
+        }
+  
+        /* Active pagination link */
+        .pagination .active a {
+          background-color: #007bff; /* Background color for active link */
+          color: white; /* Text color for active link */
+          border-color: #007bff; /* Border color for active link */
+        }
+  
+        /* Disabled pagination link */
+        .pagination .disabled a {
+          color: #6c757d; /* Text color for disabled link */
+          pointer-events: none; /* Disables click events */
+          background-color: #f8f9fa; /* Background color for disabled link */
+          border-color: #dee2e6; /* Border color for disabled link */
+        }
+      </style>
+</head>
+<body>
+<header>
+    <nav id="navbar">
+        <div class="logo">WELCOME</div>
+        <div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+    <nav id="hamburger-nav">
+        <div class="logo">WELCOME</div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#experience" onclick="toggleMenu()">Experience</li>
+                <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>   
+            </div>
+        </div>
+    </nav>
+    <section id="profile">
+        <div class="section__pic-container">
+            <img src="image-10.jpeg" alt="Girl profile">
+        </div>
+        <div class="section_text">
+            <p class="section_text_p1">Hello, I'm</p>
+            <h1 class="title">Bhargavi</h1>
+            <p class="section_text_p2">Dancer</p>
+            <div class="btn-container">
+                <button class="btn btn-color-2" 
+                onclick="window.open('Sweety bonafied.pdf')">
+                Download Certificate</button>
+                <button class="btn btn-color-1" onclick="location.href=
+                './#contact'">Contact Info</button>
+            </div>
+            <div id="socials-container">
+                <img src="email-image.png" alt="Email icon" class="icon contact-icon email-icon">
+                <p><a href="mailto:tejaswinisai24@gmail.com">
+                    Bhargavi@gmail.com</a></p>
+                <img src="linkedin-img.png" alt="My Linkedin profile"
+                class="icon" onclick="location.href='https://Linkedin.com/'"
+                >
+            </div>
+        </div>
+    </section>
+    <section id="about">
+        <p class="section_text_p1">Get To Know More</p>
+        <h1 class="title">About Me</h1>
+        <div class="section-container">
+            <div class="section__pic-container">
+                <img src="image-11.jpeg" alt="Profile Picture" 
+                class="about-pic">
+            </div>
+            <div class="about-details-container">
+                <div class="about-containers">
+                    <div class="details-container">
+                        <img src="experience-image.png" alt="Experience icon"
+                        class="icon">
+                        <h3>Experience</h3>
+                        <p> Welcome to my portfolio! I am a passionate performer with a love for the stage. I am good dancer and participated in many programs.
+                            Here, you can explore my journey, performances, and aspirations.
+                            I dance to bring meaning, to bring beauty, to bring possibility, and 
+                            to bring inspiration and hope into a concrete world. I dance for clarity and for charity. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <section id="experience">
+        <p class="section_text_p1">Explore My</p>
+        <h1 class="title">Experience</h1>
+        <div class="experience-details-container">
+            <div class="about-containers">
+                <div class="details-container">
+                    <h2 class="experience-sub-title">Dancer</h2>
+                    <div class="article-container">
+                        <article>
+                            <div>
+                                <p>Highly skilled dancer with 6 years of experience in Kuchipudi.
+                                    Proficient in creating routines and teaching different steps.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="skills">
+        <p class="section_text_p1">Browse My Recent</p>
+        <h1 class="title">Skills</h1>
+        <div class="experience-details-container">
+            <div class="details-container color-container">
+                <h4 class="experience-sub-title project-title">Choreography</h4>
+                <h4 class="experience-sub-title project-title">Performance</h4>
+                <h4 class="experience-sub-title project-title">Audition Preparation</h4>
+                <h4 class="experience-sub-title project-title">
+                Vocabulary of sign language based on gestures of hands</h4>
+                <h4 class="experience-sub-title project-title">
+                Flexed knees (Aramandi) combined with footwork</h4>
+                
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <p class="section_text_p1">Get in Touch</p>
+        <h1 class="title">Contact Me</h1>
+        <div class="contact-info-upper-container">
+            <div class="contact-info-container">
+                <img src="email-image.png" alt="Email icon" class="icon contact-icon email-icon">
+                <p><a href="mailto:tejaswinisai24@gmail.com">
+                    Example@gmail.com</a></p>
+            </div>
+            <div class="contact-info-container">
+                <img src="linkedin-img.png" alt="Linkedin icon" class="icon contact-icon">
+                <p><a href="https://www.Linkedin.com">LinkedIn</a></p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <nav>
+            <div class="nav-links-container">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>Copyright &#169; 2024 Bhargavi. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+    <div class="pagination">
+        <a href="index-2.html">Previous</a>
+        <a href="#">1</a>
+        <a href="protofolio-2.html" class="active">2</a>
+        <a href="protofolio-3.html">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="protofolio-3.html">Next</a>
+      </div>
+</body>
+</html>

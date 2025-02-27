@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="stylesheet.css" />
+
+    <style>
+      .container {
+        display: flex;
+        align-items: flex-start;
+        gap: 40px; /* Increased gap between the image and the content */
+        padding: 20px; /* Optional: Adds padding around the container */
+      }
+
+      .section__pic-container {
+        flex-shrink: 0;
+        /* Optionally, you can add margin here for more control */
+        margin-right: 40px; /* Adjust the value as needed */
+      }
+
+      .section__pic-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .section_text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .btn-container {
+        margin-top: 10px;
+      }
+
+      #socials-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      #socials-container .icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      #socials-container p {
+        margin: 0;
+      }
+
+      #socials-container a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .section_text_p1,
+      .title,
+      .section_text_p2 {
+        margin: 0;
+      }
+
+      #skills-container {
+        margin-top: 20px;
+      }
+
+      #skills-container ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      #skills-container li {
+        margin: 5px 0;
+        font-weight: bold;
+      }
+      /* Container for pagination */
+      .pagination {
+        display: flex;
+        justify-content: center; /* Centers the pagination */
+        padding: 20px; /* Adds padding around the pagination */
+        list-style-type: none; /* Removes default list styling */
+      }
+
+      /* Individual pagination items */
+      .pagination li {
+        margin: 0 5px; /* Adds margin between pagination items */
+      }
+
+      /* Links within pagination items */
+      .pagination a {
+        display: block;
+        padding: 10px 15px; /* Adds padding inside the pagination links */
+        color: #007bff; /* Sets the text color */
+        text-decoration: none; /* Removes underline from links */
+        border: 1px solid #dee2e6; /* Adds border to links */
+        border-radius: 4px; /* Rounds the corners of the links */
+      }
+
+      /* Hover effect for pagination links */
+      .pagination a:hover {
+        background-color: #e9ecef; /* Changes background color on hover */
+        color: #0056b3; /* Changes text color on hover */
+      }
+
+      /* Active pagination link */
+      .pagination .active a {
+        background-color: #007bff; /* Background color for active link */
+        color: white; /* Text color for active link */
+        border-color: #007bff; /* Border color for active link */
+      }
+
+      /* Disabled pagination link */
+      .pagination .disabled a {
+        color: #6c757d; /* Text color for disabled link */
+        pointer-events: none; /* Disables click events */
+        background-color: #f8f9fa; /* Background color for disabled link */
+        border-color: #dee2e6; /* Border color for disabled link */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <nav id="navbar">
+        <div class="logo">WELCOME</div>
+        <div>
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hamburger Navigation -->
+    <nav id="hamburger-nav">
+      <div class="logo">WELCOME</div>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#about" onclick="toggleMenu()">About</a></li>
+          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+          <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section id="profile">
+      <div class="container">
+        <div class="section__pic-container">
+          <img
+            class="image"
+            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBAQEBAVEBAVDRIbDRUVDRsQEA4SIB0iIiAdHx8kKDQsJCYxJx8fLUYtMSs3MDAwIys/QD8uNzQ5MC0BCgoKDg0OFRAQFSseFho3Ky0rLTcrLS03Ny0tNys3LSstKy03KystNy0tLS03Mi0tKy0rNy43NystNzcrNys3K//AABEIAMgAyAMBIgACEQEDEQH/xAAbAAAABwEAAAAAAAAAAAAAAAAAAQIDBAUGB//EAEkQAAEDAgMEBAkHCgQHAAAAAAEAAgMEERIhMQVBUWEGEyJxBxQjMkKBkbGyJFJ0kqHB8BUzREVicnWz0eFkZXOCNENjg6Kj8f/EABoBAAIDAQEAAAAAAAAAAAAAAAMEAAIFAQb/xAApEQACAgICAQMEAgMBAAAAAAAAAQIDBBESITEFIkETMjNxI1EUYYEV/9oADAMBAAIRAxEAPwDn+3o/lVSf8VN8bk1BFfcrDarL1NVl+lTfG5U9XtPqXYGtBI84nigT3KWkalEo118pEycsZqbneG5lQHTyHtMis0audp7dE2NpOJuG3dyaGgJ/Y+1XOqGCoPWNJs3EcmO3GyLVTFPvyL3ZcpvrpFpR3cxjjkSNOBUpjeCakqI4ZJGSvDPKlzL72Oz991LppQ4ExuBaQRcZ2SFykpPa6NTHcJRjqXYbIS4EgZDU3TE0dwVMnaG5AHnc5epImaMrfNy5peM9MalBNFJLCkNp+SsXM9eSBa1jC47vYfwUyrtLQnKlb2N0tNnopD3xt85wB4XWZrdpyk5OIHAZBFSkkXJ70VVSl5YpPJhHqKNQ58QscfMZHNOQmOV35y775hx8/wBar9l1UOExVIJjObXtGJ8R7t45K4Z0Zjf2oauEt49aGuHqOaZVK15FHkNvZCNBm7LCQcm2zJ4XUd1LyWq2js/Axjw8Pys9wORdbIqokiWbZZKubizWrrjZBSRVNgzAsrGOIcskGRZp5rVx2tor9JbEYeSQ6C991h7VKa38HRWGzdkGo6yzmsawi9zlc5ZexStyb0itsYqJlp4cj3e1Qn0ZBzFjzXRm9DpDcF7bbrNOvNFJ0SLbvqH3JtmDqTlmnYysXWhGUYM5r4tmnoYuS3lX0Rc3EGuAB1uy7vaqyTo3I11gQRxPZV5ObXgpFQTIvRyK1XRkj9Pp7fWCCtdn7MkjqKNxAt4/Telxcgq1xkl2jtkot9Mzu0R8pqfpc/xuVRt3Z+JvWNHaaO2OI4q22s7DPUkj9LmB+uUVTKGMJOV75kXAG/7PuQ7JNWLRoVRhKlqX9GOpn7kVS2zrj1KVDQ4hjByJy42SpoQNTfgmPqrf+zO/xpa2/A7tmrdUhkuEANY1p4udvPtVp0bFgzM2cx5d3YgP6qnp2F7cJJbGX52F3OPADeeS1tBS9W25sHG3ZHawDQNHd70PIs1W9+Q+JBO1NPSHiBe1st2/LgpENM9zcRIDBkCfuQbS3wkkAEhTZZSL4W2YAcOdsXFZPI3nEpZIwHOAvYHuKj7XaBA63FvvVzJGHdoEXyw9m3Z581X7Zpg+EsLgzE9gudwvqu1y5TiilsNVSf8AowxzdYcVqNj9GqiVoOHq2k5FxsT3DXj6xZRY5qOlkc1rhLYt7QGPv4b7qXF02wXwRF37ztcwc/ZnzsdVsnl97NBTdEIxbrJC/wDdaAD5uh4Z68MxoUKrYVIwC0eIne6Qk6AjTv8AwLLMv6U189hG0jQDA039HeObQe9NS7C2rKMTo5bEaF1vsU5JfJZQk/g6FseKnMMkOJkRHmXlsMVzbU8RbuKoqioibrIwf7wsNXbCqYgXSREcclWsaSQBe50A3pe7Hhc1LfgaoybKE468nRYJ43k4Xtd3G6m7PiD5WNd5peAVV9HtjGFgc7844Zj5g4K1gfhka8+i8H2FIpxU9LwjRam4bktNm22XsymcXYYW3a8tN23z9anbapH+KvhhYyz3svchjGjW59dhlvIUfYUkYnmjBcXixeSOw6+f2aKb0l2MK6Awda+EdaxxLDYutuPv7wtLkl4RmTg99suKWK7WlwLXFoxAkXabaZKl2jUxyVUdMH2kDmnCWXa/ec+QV419gBe9ha51PNMtpYxKZsA6wtAc62eEblVz2XrSjvYuopQ4LHbWhe+dkMYIZj8q9rhc2FyOQtbXO62lQ0PY9hJAcwhxBsbEWyO5UHRro2KFkrOtMvWShxLhZ18IGup03okbAEoFPXQYZKU/5jS/Ggrfb8IHix3/AJSo/jQRoyTWwMo6ZyuujBmqQdDVT3+u5Ue1g58WEXuwubIBmd1j3ZLTSxYp5rC5NXPl/wBxyu6Ho2xpxy2uc3AZbgMzvGQWRPJVdj38G5OpfQgvlo5ZTNkthBNtwsDZPRUocd8juDTiz5nd7106ago2GzaZjiQ83Mdy7l+AnI7tAwRtbdovZoa1p4AABW/9CL7jETeLNpKU+jObF6Ouye8FpA7JLcIZya3X1laWl2XHELhtzq02F/VwTfjDBYySDFYEgeaO62uqam2tiBEeZta5y9iRtssslvYzCrrikRq5hY8jQB2VjeyOpnu0C1yDcg7kmkOK4drfMHvSqiEk7jnqqeDWivakZrb+1309msAxuF7kZDuCxlVWSSG8jy48zddD2tshkzbOycPMdr6u5Z6ToqRcl4IAyAFlp4t1MY9+TIzqMictr7Si2dQOmcBewvqt5svYENOxsrqbrt93vAz5DeofRvZoADBYvub9+5avZeyQyVsj2OfK2+A2uBfvyRLLty89C9NCS8dl1sHa8Dw8RQsjexmmCxVLWVlRI8ySRPlaDZsbZRHu1PJWNFTWqQ0DDZtrDh96sY6K0hjLiz5hB3cEBS77GuPRng3rMbHRkNGIAE42+oqp2N0aZEJX4W5SuLCRidlaw5LfOohGDfMkak5qtkaBTygbj2uNrjNDsm1CSRaEE7ItmfkCjlqkSJmyRpeh6/tm+2bMMLHbyxtzvOSsGVOves1sqo8kzPQW+1Tm1Oven5XmdGllz4wjFSqU1aafXITyUvIRY7Zf+OJDq8cVmpK48U0awoE87XgIsP8AstttVQd4qL/rOk+NEqOWYmWkH+Y0vxo1o4mS5V7M3LoUbNGfhm6uolfa5FXPr/qOWgqNsQtYCSbuHZA863FZt8L3S1GEXtU1BP13Io4A7O+erid6TurjKxuRoqPKENFpJtdxJa0AE5i/acPWVWzzyPzc7U5Z/YpNLTh4f3gA7wU0Y8zcWsc7oScY9Dapil4IbhbUqQ+mdgY4C4I+oU+1rASbb9Tu5WSetccrn25LvP8Ao7x0HFjbYkOFjlzHNPyVGnZKikkkkkkowChSmFjFBSvJzSR9yetxCOOLfqqKSLSW1ogxu6idjgLB2Z77LeUVczq7gAuIyOqxO0I7tB+bbdu/BKttjyAtsHWJb2StCuakjJnBwkxySetbOJYWskFzYG4e4cFZwOne/rZn4ARnFYD2nUquhgDHkuxTXIwAylgj5ZaqxqqVkowmNgB8613PPrJuj66Ka+SVUTktFjluzvZU1dUEAsGQLu1/RTa4iNoAFhf1AKkM+Nzj+0lL2+D0Ho05rY1IE0BopLxkm4m55pSt9DVvksaCazLc1J6/mq24BsMuKdD0O2bLVxRKdMmnSc03iTMr7IUVKbLykoLY66RE2TmoRm9iJs6P/jPWxV5Kb0WEb7zUn8QpvjQTVGMU9J9Ppj/5o1qYcNVmZmS3YVpnwyVIzsaqe9t/lHJImya0CwBJudUxUk9bP9KqP5jkI9DxLrBCt++RqUx9kS7oI7Rt55lN1sHpgZDz+7ipsbQAAnmtBGehGaVktjG9FCIif68U42mv/YKbSRNZIY35g5xcCOCtixoyAA9S5rRTZnRB3+xEWEK8eFFkiB3ZoMmFiyusjaOakOht3JGDkqbL70tsacwHuORWfpKp8T3Rk5B5wngrbaO14IAS913bmjNxPBQtkbEnrqZtXCMcmOTrWek7M+bx3ZLUw6Z6ba6MnOvr3FJ9mq2LVxygX13/ALJWifLCwHPMb9y5pFQ1DHWMcrJOAjcCfsWl2b0LrqvD1hkjj9LEcOXcmo1tirvSXYxtPaPXPe2IgNYwmWT0IWb3HuWV2d0kY6ZzcJbCTaLLMN3F3M6nvVn4Tqynoo/yTRm7rh20JPSedWsPdqR3LA7PJLhbK3sTUMdOLT+RN5Muakvg6jkcwbjcdyQWDvVBR7dLbNuDYDUK5o9qxPtcWPLNZl3p1kNuPaNWv1CufUumWMrxcXbfIEcUiodk2+WvvRdY1+jrm/cpQDMBa43AvbLQrP8ApyUtSiPzthw3CRC6wE8BvuVFkfn60rqnHzRc56a96OoawAEEXzT1VSMu69+CJI7chFIRpfMWKbFrjEbDeU2TdxANxfspqUUogIy3ItNnvPjFH/EKe/1kEjZp+UUf8Qp/iQRMVewFkv3kOpYetny/Sp/5jkumZ22X43KcrT5WZo31U9/ruSqTznHSyzrm/qM9HjxX0Y/osn1Aa0knuUfZu0hZrXmxG86WVdW1GI2B7IPDeo7faua2i/E0lXZ7QW6g3YU5BWYmgnI6OF96o6eoczfccCVIbLncZA6jggz8EjWWxlSTIqXaG0xEBc5nQX+1ZPaXSKV1wDYfvI1GDO5cm9IQyM6FL4pbZt6ra0UerrngFl9rdJS67Y8hx3rLy1rnZX+1MOfxyWnRgV19+WZN+fZZ14Q7US4ySTfv3rt3gxjEFOyM2Bc3EAd7iL5c1wiPtva0b3ADmSbLvkUQYMGDGBFH2cr5C2/uR7ZcNAKoc9tnTqaxF+73Kj6e9J2bOopZg5olthp2nMmQ6ZctfUqGnkdgDCMLRewJztwJXF+nvSHxypIYfIRXbCAcncXev3LtdnLwitlXFbbM3VTOke573Fz3PJeSbkuPPelQvtpkmcVjc6JwEHTRMIASXzm4P7DU7FXEb1BlPm/upu67shoKbbZGpV1QbbBsb/3WFxFOMmLcwbG2R+aqyjGXUkXjOS8M6BP0giZzdvsck/HKJWiRuhXOo4C7PFnuBK3XRTOF8ZFnNeCO4/8AxI5FUa48ooaptlOXFjsrb5bkqGLMZ2z14KfDCMYxab0t8AxHCMvckZ3dDkId6E0UWGppLG4/KNPY8e2EafpIx11Id/5QprfXCNNYk91iuVH3lTLnNUHhU1HxuR9ZZlt5zKE/52p51U38xybn17skhd+RnpMT8MRooIFG0KfAVj8RToeGgk6AHF3BNMamtrA+LzWy8k6/chJKU0iWPjBsxG2tpGaUuvZoyYODRoq8uSXHMoAr0sIqKSR4u2bnJth4yOST35oFBXBlp0Wg6ytpm8Z2fZmu9Ubg4vd+3b1BcU8HcOPaMPLGfY1dg8ZbE17nXbGwOc4lvZw6k3WflPc0h7G6htlJ4SukHi1P1MbrSzAjm2P0j9y45qrPpLth1ZUyTO0JtEPmMGgVYEzVDjEBdPkxVkks/G9LJA19SbJ4owAGI6XuL5IJJQuukDugESAKhBTDmtZ0U2iRKGk3Dslkmqz2a8BwINnBwI5oN8OcGglU+E0zp8jLHLLglsFzclLoXiQMebdpgIzyTr2gONl5iaa2jchJbG2NtNSZfrCm+MIJ5oHWUl9fyhTfGgtPB/EI5j/kM9N+em3fKqg+yRyaIunZfzk/0qcf+xySAlL5fySPSYq/hj+hAZ7EsMS270oILmG0BrbKm6WVYZAWXs59hbfh3qzrqkRRukIyaPaucbQrXzPL3m5P2JzBodkub8IzPUspVw4LyyOClJAKVdb55YDtEAjBRBQhr/Bc35cXfNp5CtJ4T9tdXEyjYe08YpiDoy+TT3nNZ3wbVDIZamaQ2Yylu4/7hks/tjaD6meSd+r3E9w3D2Jdw5WbYwp8a9EIBKJt3pONJRwHkPnvRIwiKhwCF0LfiyBFl0gDoiROOiChBTSpMBzCjBOxkrjIdS6HzCSmtcEteQeV8wrtsSyXg2qfKSRn0o7jvB/ut45gvkvJ57+nc0bWP7oJkB7bSUn8RpfjRqTUNGKlNv1jS/GgtL0x7pE8xv6hkpPzk/0qo/mORgIn/nJ/pdR/MclBJX/kkepxfxQ/QYG5GAgq7b1f1MLiD2jkzv4odUHOSii9tka4Ob+Cv6R7bhDJIB23EWNjZrT3rEFLdcknilNpnnRpPc269JTTGmOkePysid8+TGmpSItINjkRqDkQjTAqGEN6IJbYy69huUIPQVjmRyRt0e5mI8hc29tj6lHJJ1N0bRa196F/xZcWjoAjCSjXTgq6LEko1CB4kV0EShBLtyMIijChBScimI5hNolCGp6I1eCrhd6OKx9eS60HrhuzZC1zSNxHqXaKacPYx9x2mA68QvMet1++Mjc9MknFxY5Vvu+l/iNL8aCamcOspM/1jS/GiTHpXVH/AEDmx/lJUHRBtTSmeFwZN19V1gcezJaV/sOSyMjC02cM05JtqqjbVQRTGNjqufT0fKO04XTcG1g/sVQDH2JEmHsSHnbQ8x6wjZFULZPj0xvFutoiufcQgsH0k2j1szrea02aF0OWlI0zuL3vkBxvvHMLlVU0h7gdcZv33V8GjjKTl8A/UslShFRfk1XQvoz14E0o8mScI+fY/wBV0+g2LTloDWNDfTta4Wa6PM6mKniZkMPaJGZfv96udmgtc9oy7XFEtu3JgaaUorZk/CB0OADqqmONo/Ojf3rnK7e9xkp5G3sXRuFveuN7XozDNJHwccP7u5M0WcumKZVKh2iIlBxF7bxY8wkqRRQ45I2fOkYPaUw3pCiW3on9IaXqjAzT5LGT3m6qFrPCRGG1bQNBTtA9pWUsq1vcdlrFqQQRokZVygEESNQgLokEFCBFC6BKKxXCCgUoJLW8UZZwXSEmneQV1LovU9ZSxne27T6lydkma6H0DmHi7xwlv7Qsv1SvlTv+h/0+fGzRpy7ytJ/EaX40FHjlvUUY/wAwpvjCCDgVtUhMyadhVOoZHSzEDI1c9rn/AKjkqooQbRnPvblqnKoNbLKcRv4zOSLm4PWO0Ud9QTa99cu0hWt/VejWpSdMd/0J8rSl7WESRCxkaSTg5D+oVPtPo/DVB01M+0gBMjTl2t9x94y42Vt2i7K5d9qR+Tnkl8eKORouSDbEE5VkaWmZt+NvuJbsktTU7iLFsoB9YO9Tn1I60EZY2NNvsPuWek2j1sbYpGmLFvAwMfbfbceY9inzTNwMOksRub+nGdeR4rko/KLVz60yXs54xzxEWIeSP3XC4+9Ybp3s2TrG1GA4HRgOIFw0jit4x4fLE8ENDsIeT9izO1+mQgnqYGsbNEJCAQbseO7vV6N8to5k8XHUmc7ur7olSE19M12VpcR/2gn7lS1D8bnODQ0FxNho3ktP4OwX17XONyIpCSe633p2x6izKgveh3wlj5Wz/Qb7zmsl7FsPCdCG1bbCwMV/tKxq5T9iLXdTYEEEEUEBGiQUIC6IlC6K64QNouUstSYtU6QLc1CCMKMIYUAukFAA6hbLoO+zZrXtZntzWOC2/ReLBTYjkXvuBvw6JTN19LQxi757LyilvVUY/wAfT/GESjbLd8sos/0+n+MIKuNDVaL3y3NhVFzLPc/pU+fAY3Ii3mEcw8rP9LqP5jkoWB0yvosu78jPQUfij+hVLCXPaOeXNXri18xv5hbbM4bW3WVPG5zHNkFr3y5K/bA2Q9aL3wnLcVXl0Uceyr2pTx3LCN3m778VUTUTmNdZvWMIJsciw8Rz5hXEsLr2GdtLjte1J/aceyXZcQd64rJQ7RHVGzp9Mz1ZWSeJSxBokYWnCQLTM5OG8c1z4grqO1qRpY+Vt2uY0m49KwWUlghrO0y0cltdAf3h94WriXKa2kZGbS4y02ZoLb+C2G887/mwtA9bv7LI1lE+J2F4z3HUO5hbrwWxnDUuAucUQH49aYul7HoUpXvWyL4Vh8ph5xH3rDLceFBrutgLh/y3Z6E5i+W5Yg967R9iOX/ewgggiKMCDRIIlwgEeFHGEsFdIJGW5LtcIBHdQglGAhZC/BQg7Txl7g0C5JsBxXQQ3qomx3yDGg8+P2qp6LbHLGieQWJF4QfiT+06m5sNN6z7pqyaivCHKYcI7ZI2NLirqK2nj9P8YQUPo2+9dRD/AB9P8YQTNcdRA2Pci4qGeVmtn8qnxZWsescja25A5oILHuXvZ6Ch/wAUf0PiXDdtrgXGE529attl1jR2TYM9A4rkIIKmlokm0T5auNtziBPAanks9Uy4nE7t1sgOSCCHJFoNtjdUfIyi17xP9y5bHKWOxN7JvuKCC0PTF1IzvVOpRLui2sx7THOBnobZf2K1PRWsjow4Ov1ckgcXjPq7ZZjhzCJBOWxXgRqfeyP4VyHGlkaQ5pbJhIzB0WAxIIIlH2oHd9wlBBBGYF9AAvkn2w2zOqCCrs7rrYkm6I6oIKxBQQsggoQKx0Wk6J7A653WyDyTTp893BBBKZlkoVtoPjRUrNM1O057AtFu62izNUdUEEph9rbGr+noe6L/APH0P0+n+MIIILViuhB+T//Z"
+            alt="magician"
+          />
+        </div>
+        <div class="section_text">
+          <p class="section_text_p1">Hello, I'm</p>
+          <h1 class="title">Raj Kumar</h1>
+          <p class="section_text_p2">Magician</p>
+          <div class="btn-container">
+            <button
+              class="btn btn-color-2"
+              onclick="window.open('Sweety bonafied.pdf')"
+            >
+              Download Certificate
+            </button>
+            <button
+              class="btn btn-color-1"
+              onclick="location.href='./#contact'"
+            >
+              Contact Info
+            </button>
+          </div>
+          <div id="socials-container">
+            <img
+              src="email-image.png"
+              alt="Email icon"
+              class="icon contact-icon email-icon"
+            />
+            <p>
+              <a href="mailto:tejaswinisai24@gmail.com"
+                >rajkumar2314@gmail.com</a
+              >
+            </p>
+            <img
+              src="linkedin-img.png"
+              alt="My Linkedin profile"
+              class="icon"
+              onclick="location.href='https://Linkedin.com/'"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <p class="section_text_p1">Get To Know More</p>
+      <h1 class="title">About Me</h1>
+      <div class="section-container">
+        <div class="section__pic-container">
+          <img
+            src="data:image/jpeg;base64,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"
+            alt="Profile Picture"
+            class="about-pic"
+          />
+        </div>
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <img
+                src="experience-image.png"
+                alt="Experience icon"
+                class="icon"
+              />
+              <h3>Experience</h3>
+              <p>
+                I am Rajkumar, a magician from Delhi, and I have been enchanting
+                audiences with my traditional Indian magic for over two decades.
+                My journey began at a young age, inspired by the rich cultural
+                heritage of India, and I quickly became known for my unique
+                blend of classical Indian magic and modern illusions. I have had
+                the privilege of performing at high-profile events like the
+                Delhi Cultural Fest and various corporate shows, earning
+                accolades such as the Magician of the Year and the Cultural
+                Ambassador Award. My international performances have allowed me
+                to showcase Indian magic on a global stage. Committed to
+                preserving this ancient art, I also conduct workshops for
+                underprivileged children, sharing my passion and skills with the
+                next generation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <p class="section_text_p1">Explore My</p>
+      <h1 class="title">Experience</h1>
+      <div class="experience-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <h2 class="experience-sub-title">Magician</h2>
+            <div class="article-container">
+              <article>
+                <div>
+                  <p>
+                    Highly skilled magician with 25 years of experience in
+                    traditional Indian magic. Proficient in creating captivating
+                    performances and teaching various illusions. Experienced in
+                    performing at high-profile events and international
+                    festivals, earning accolades such as the Magician of the
+                    Year and the Cultural Ambassador Award. Dedicated to
+                    preserving and promoting the art of Indian magic, I also
+                    conduct workshops and magic camps for aspiring magicians and
+                    underprivileged children.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <p class="section_text_p1">Browse My Recent</p>
+      <h1 class="title">Skills</h1>
+      <div class="experience-details-container">
+        <div class="details-container color-container">
+          <h4 class="experience-sub-title project-title">
+            Traditional Indian Magic Techniques
+          </h4>
+          <h4 class="experience-sub-title project-title">Illusion Creation</h4>
+          <h4 class="experience-sub-title project-title">
+            Performance Choreography
+          </h4>
+          <h4 class="experience-sub-title project-title">
+            Audience Engagement
+          </h4>
+          <h4 class="experience-sub-title project-title">
+            Event Customization
+          </h4>
+          <h4 class="experience-sub-title project-title">
+            Workshop and Camp Facilitation
+          </h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <p class="section_text_p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img
+            src="email-image.png"
+            alt="Email icon"
+            class="icon contact-icon email-icon"
+          />
+          <p>
+            <a href="mailto:tejaswinisai24@gmail.com">rajkumar2314@gmail.com</a>
+          </p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="linkedin-img.png"
+            alt="Linkedin icon"
+            class="icon contact-icon"
+          />
+          <p><a href="https://www.Linkedin.com">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2024 Rajkumar. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <a href="index-2.html">Previous</a>
+      <a href="#">1</a>
+      <a href="protofolio-2.html" class="active">2</a>
+      <a href="protofolio-3.html">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="protofolio-3.html">Next</a>
+    </div>
+  </body>
+</html>

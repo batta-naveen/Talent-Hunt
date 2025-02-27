@@ -1,0 +1,191 @@
+/* Styling */
+/* GENERAL */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+} 
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+p{
+    color: rgb(85,85,85);
+}
+
+/* Transition */
+a, .btn{
+    transition: all 300ms ease;
+}
+
+/* NAVBAR */
+nav, .nav-links{
+    display: flex;
+}
+nav{
+    justify-content:space-around;
+    align-items: center;
+    height: 17vh;
+}
+.nav-links{
+    gap:2rem;
+    list-style: none;
+    font-size: 1.5rem;
+}
+a{
+    color:white;
+    text-decoration: none;
+    text-decoration-color: white;
+}
+a:hover{
+    color: gray;
+    text-decoration: underline;
+    text-underline-offset: 1rem;
+    text-decoration-color: rgb(85,150,185);
+}
+.logo{
+    font-size: 2rem;
+    color: white;
+}
+.logo:hover{
+    cursor: default;
+}
+header{
+    background-color: black;
+}
+
+/* WELCOME SECTION */
+.container{
+    flex: 1;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 1rem;
+    margin-left: 30px;
+    border-radius: 1rem;
+    border: rgb(53,53,53) 0.1rem solid;
+    border-color: rgb(163, 163, 163);
+}
+
+.heading{
+    text-align: center;
+    color: blue;
+    font-size: 24px;
+    margin-bottom: 1rem;
+    margin-top: 100px;
+    margin-left: 10px;
+}
+
+/* IMAGE SECTION */
+.center-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 100vh; 
+}
+
+.center-container img {
+    max-width: 50%; 
+    margin-right: 40%; 
+}
+
+/* Heading SECTION */
+#centered-heading {
+        color:SlateBlue;
+        text-align: center; /* Horizontal centering */
+        position: absolute;
+        top: 50%; /* Vertical centering */
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+/* BUTTON SECTION */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Full-width input fields */
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  /* When the inputs get focus, do something */
+  .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/login button */
+  .form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+  }
+  
+  /* Add a red background color to the cancel button */
+  .form-container .cancel {
+    background-color: red;
+  }
+  
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+
+  .cancle{
+    border: rgb(53,53,53) 0.1rem solid;
+    background: rgb(0,0,0);
+  }
+
+  .btn{
+    font-weight: 600;
+    transition: all 300ms ease;
+    padding: 1rem;
+    width: 8rem;
+    border-radius: 2rem;
+}
+
+header{
+    background-color: purple;
+}

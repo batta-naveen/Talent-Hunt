@@ -1,0 +1,782 @@
+**Week – 4: PROGRAMS ON PL/SQL**
+1. a. Write a PL/SQL program to swap two numbers.
+   b. Write a PL/SQL program to find the largest of three numbers.
+sol)
+
+1a) 
+DECLARE 
+a NUMBER := 10;
+b NUMBER := 20;
+c NUMBER ;
+BEGIN 
+
+DBMS_OUTPUT.PUT_LINE(a|| ' '  ||b);
+
+c := a;
+a := b;
+b := c;
+
+DBMS_OUTPUT.PUT_LINE(a|| ' ' || b);
+END;
+/
+
+1b)
+DECLARE 
+
+a NUMBER := 10;
+b NUMBER := 20;
+c NUMBER := 30;
+
+BEGIN 
+
+if a>b and a>c then
+DBMS_OUTPUT.PUT_LINE(a);
+
+elsif b>a and b>c then 
+DBMS_OUTPUT.PUT_LINE(b);
+
+else
+DBMS_OUTPUT.PUT_LINE(c);
+end if;
+
+END;
+/
+
+2. a. Write a PL/SQL program to find the total and average of 6 subjects and display the grade.
+   b. Write a PL/SQL program to find the sum of digits in a given number.
+
+2a)
+DECLARE 
+
+sub1 number;
+sub2 number; 
+sub3 number; 
+sub4 number; 
+sub5 number; 
+sub6 number; 
+average number;
+total number;
+
+BEGIN 
+
+sub1 :=&sub1;
+sub2 := &sub2;
+sub3 := &sub3;
+sub4 := &sub4;
+sub5 := &sub5;
+sub6 := &sub6;
+--calculating Total Marks obtained by student from all six Subjects:
+total:= sub1 + sub2+ sub3+ sub4+ sub5+ sub6 ;
+
+average := total/6;
+
+IF (average>=90) THEN
+DBMS_OUTPUT.PUT_LINE ('Grade A.');
+ELSIF (average>=80) THEN
+DBMS_OUTPUT.PUT_LINE ('Grade B.') ;
+ELSIF (average>=70) THEN
+DBMS_OUTPUT.PUT_LINE ('Grade B.') ;
+ELSE 
+DBMS_OUTPUT.PUT_LINE ('Grade D.' ); 
+
+END IF; -- Ending If Statement For Grade Calculation And Display Of Result
+
+
+END;
+/
+
+2b)
+DECLARE
+    a NUMBER;
+    b NUMBER;
+    c NUMBER := 0;
+
+BEGIN 
+    a := 12;
+
+    WHILE a > 0 LOOP
+        b := MOD(a,10);
+        c := c+b;
+        a := FLOOR(a / 10);
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('sum of digits in the number is: ' || c);
+END;
+/
+
+3. a. Write a PL/SQL program to display the number in reverse order.
+   b. Write a PL / SQL program to check whether the given number is prime or not.
+
+3a)
+DECLARE
+    a NUMBER;
+    b NUMBER;
+    c NUMBER := 0;
+
+BEGIN 
+    a := &a;
+
+    WHILE a > 0 LOOP
+        b := MOD(a,10);
+        c := c*10+b;
+        a := FLOOR(a / 10);
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('Reverse of the number is: ' || c);
+END;
+/
+
+3b)
+DECLARE
+    num NUMBER;
+    is_prime BOOLEAN := TRUE;
+BEGIN
+    num := &num;
+    IF num < 2 THEN
+        is_prime := FALSE;
+    ELSE
+        -- Loop to check if the number is divisible by any integer from 2 to the square root of the number
+        FOR i IN 2..FLOOR(SQRT(num)) LOOP
+            IF num MOD i = 0 THEN
+                is_prime := FALSE;
+                EXIT; -- Exit the loop as the number is not prime
+            END IF;
+        END LOOP;
+    END IF;
+
+    -- Display the result
+    IF is_prime THEN
+        DBMS_OUTPUT.PUT_LINE(num || ' is a prime number.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE(num || ' is not a prime number.');
+    END IF;
+END;
+/
+
+4. a. Write a PL/SQL program to find the factorial of a givennumber.
+   b. Write a PL/SQL code block to calculate the area of a circle for a value of radius varying
+      from 3 to 7. Store the radius and the corresponding values of calculated area in an empty
+      table named areas, consisting of two columns radius and area.
+
+4a)
+DECLARE
+   fact NUMBER:=1;
+   num NUMBER;
+BEGIN
+   num:=&num;
+   WHILE (num>0)LOOP
+   fact:=fact*(num);
+   num:=num-1;
+   END LOOP ;
+   dbms_output.put_line ('Factorial of'|| num||'is:' || fact);
+END;
+/
+
+4b)
+DECLARE
+   r NUMBER :=3;
+   pi CONSTANT FLOAT:=3.1415926535897;
+   a NUMBER;
+
+   CREATE TABLE areas(radius NUMBER, area NUMBER);
+BEGIN
+   WHILE r<=7 LOOP
+      a := pi*r*r;
+      INSERT INTO areas VALUES(r,a);
+      r := r+1;
+   END LOOP;
+   COMMIT;
+END;
+/
+
+5. a. Write a PL/SQL program to accept a string and remove the vowels from the string. (When
+   „hello‟ passed to the program it should display „Hll‟ removing e and o from the world Hello).
+   b. Write a PL/SQL program to accept a number and a divisor. Make sure the divisor is less than or
+   equal to 10. Else display an error message. Otherwise Display the remainder in words.
+
+5a)
+DECLARE
+    v VARCHAR2(100);
+    p VARCHAR2(100);
+BEGIN
+    v := '';
+    p := 'hello';
+
+    FOR i IN 1..LENGTH(p) LOOP
+        IF UPPER(SUBSTR(p,i,1)) NOT IN ('A','E','I','O','U') THEN
+            v := v||SUBSTR(p,i,1);
+        END IF;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Output String : '||v );
+END;
+/
+
+5b)
+DECLARE
+    num NUMBER;
+    div NUMBER;
+    rem NUMBER;
+    remStr VARCHAR2(10);
+BEGIN
+    num := &num;
+    div := &div;
+
+    IF div >10 THEN 
+        DBMS_OUTPUT.PUT_LINE('Error: Divisor cannot be greater than 10');
+    ELSE 
+        rem:= MOD(num,div);
+        CASE rem
+            WHEN 0 THEN remStr := 'ZERO';
+            WHEN 1 THEN remStr :='ONE';
+            WHEN 2 THEN remStr :='TWO';
+            WHEN 3 THEN remStr :='THREE';
+            WHEN 4 THEN remStr :='FOUR';
+            WHEN 5 THEN remStr :='FIVE';
+            WHEN 6 THEN remStr :='SIX';
+            WHEN 7 THEN remstr := 'SEVEN';
+            WHEN 8 THEN remStr :='EIGHT';
+            WHEN 9 THEN remStr :='NINE';
+            WHEN 10 THEN remstr := 'TEN';
+            ELSE remStr:= 'GREATER THEN THEN';
+        END CASE;
+    END IF;
+    DBMS_OUTPUT.PUT_LINE('Remainder in words:' || remStr);
+EXCEPTION
+    WHEN OTHERS THEN 
+        DBMS_OUTPUT.PUT_LINE('AN ERROR OCCURED :' || SQLERRM);
+
+END;
+/
+
+**Week – 5: PROCEDURES AND FUNCTIONS**
+1. Write a function to accept employee number as parameter and return Basic +HRA together as single column.
+2. Accept year as parameter and write a Function to return the total net salary spent for a given year.
+3. Create a function to find the factorial of a given number and hence find NCR.
+4. Write a PL/SQL block o pint prime Fibonacci series using local functions.
+5. Create a procedure to find the lucky number of a given birth date.
+6. Create function to the reverse of given number.
+
+1)
+CREATE OR REPLACE FUNCTION calculate_basic_hra(emp_num IN NUMBER) RETURN NUMBER AS
+    v_basic NUMBER;
+    v_hra NUMBER;
+BEGIN
+    SELECT basic, hra INTO v_basic,v_hra from emp WHERE emp_no = emp_num;
+    return v_basic+ v_hra; 
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN 
+        RETURN NULL;
+    WHEN OTHERS THEN
+        RETURN NULL;
+END;
+/
+
+2)
+CREATE OR REPLACE FUNCTION getNetSalaryForYear(p_year IN VARCHAR) RETURN NUMBER AS
+    total_net_salary NUMBER := 0;
+BEGIN
+    SELECT SUM(basic + hra) INTO total_net_salary
+    FROM emp
+    WHERE EXTRACT(YEAR FROM salary_date) = TO_NUMBER(p_year);
+
+    RETURN total_net_salary*12;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN 0; -- If no data found for the given year, return 0.
+    WHEN OTHERS THEN
+        RETURN NULL; -- Handle other exceptions if needed
+END;
+/
+
+3)
+CREATE OR REPLACE FUNCTION factorial(n IN NUMBER) RETURN NUMBER AS
+    result NUMBER := 1;
+BEGIN
+    IF n < 0 THEN
+        RETURN NULL; -- Factorial is not defined for negative numbers
+    ELSIF n = 0 THEN
+        RETURN 1;    -- Factorial of 0 is 1
+    ELSE
+        FOR i IN 1..n LOOP
+            result := result * i;
+        END LOOP;Create a function to find the factorial of a given number and hence find NCR
+        RETURN result;
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN NULL; -- Handle other exceptions if needed
+END;
+/
+
+CREATE OR REPLACE FUNCTION calculate_ncr(n IN NUMBER, r IN NUMBER) RETURN NUMBER AS
+    n_factorial NUMBER;
+    r_factorial NUMBER;
+    n_minus_r_factorial NUMBER;
+BEGIN
+    IF r < 0 OR r > n THEN
+        RETURN NULL; -- Invalid values for r
+    ELSE
+        -- Calculate the factorials
+        n_factorial := factorial(n);
+        r_factorial := factorial(r);
+        n_minus_r_factorial := factorial(n - r);
+
+        -- Calculate NCR using the formula
+        RETURN n_factorial / (r_factorial * n_minus_r_factorial);
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN NULL; -- Handle other exceptions if needed
+END;
+/
+
+5)
+CREATE OR REPLACE PROCEDURE find_lucky_number(p_birth_date IN DATE) AS
+    lucky_number NUMBER := 0;
+BEGIN
+    -- Extract the day, month, and year from the birth date
+    DECLARE
+        v_day NUMBER := TO_NUMBER(TO_CHAR(p_birth_date, 'DD'));
+        v_month NUMBER := TO_NUMBER(TO_CHAR(p_birth_date, 'MM'));
+        v_year NUMBER := TO_NUMBER(TO_CHAR(p_birth_date, 'YYYY'));
+    BEGIN
+        -- Calculate the sum of digits of the day, month, and year
+        WHILE v_day > 0 LOOP
+            lucky_number := lucky_number + (v_day MOD 10);
+            v_day := FLOOR(v_day / 10);
+        END LOOP;
+
+        WHILE v_month > 0 LOOP
+            lucky_number := lucky_number + (v_month MOD 10);
+            v_month := FLOOR(v_month / 10);
+        END LOOP;
+
+        WHILE v_year > 0 LOOP
+            lucky_number := lucky_number + (v_year MOD 10);
+            v_year := FLOOR(v_year / 10);
+        END LOOP;
+
+        -- Keep reducing the lucky number to a single-digit number (if needed)
+        WHILE lucky_number > 9 LOOP
+            lucky_number := (lucky_number MOD 10) + FLOOR(lucky_number / 10);
+        END LOOP;
+
+        -- Print the lucky number
+        DBMS_OUTPUT.PUT_LINE('Your lucky number is: ' || lucky_number);
+    END;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error occurred while calculating the lucky number.');
+END;
+/
+
+6)
+CREATE OR REPLACE FUNCTION reverse_number(p_number IN NUMBER) RETURN NUMBER AS
+    reversed_number NUMBER := 0;
+    remainder NUMBER;
+    num_copy NUMBER := p_number;
+BEGIN
+    WHILE num_copy > 0 LOOP
+        remainder := num_copy MOD 10;
+        reversed_number := reversed_number * 10 + remainder;
+        num_copy := TRUNC(num_copy / 10);
+    END LOOP;
+
+    RETURN reversed_number;
+END;
+/
+
+**Week – 6: TRIGGERS**
+    1. Create a row level trigger for the customers table that would fire for INSERT or UPDATE or DELETE
+    operations performed on the CUSTOMERS table. This trigger will display the salary difference between the
+    old values and new values:
+    CUSTOMERS table:
+    ID NAME AGE ADDRESS SALARY
+    1 Alive 24 Khammam 2000
+    2 Bob 27 Kadappa 3000
+    3 Catri 25 Guntur 4000
+    4 Dena 28 Hyderabad 5000
+    5 Eeshwar 27 Kurnool 6000
+    6 Farooq 28 Nellur 7000
+
+    2. Creation of insert trigger, delete trigger, update trigger practice triggers using the passenger database.
+    Passenger( Passport_ id NUMBER PRIMARY KEY, Name VARCHAR (50) Not NULL, Age NUMBER Not NULL, Sex Char, Address VARCHAR (50) Not NULL);
+
+    a. Write a Insert Trigger to check the Passport_id is exactly six digits or not.
+    b. Write a trigger on passenger to display messages „1 Record is inserted‟, „1 record is deleted‟, „1 record is
+    updated‟ when insertion, deletion and updation are done on passenger respectively.
+    3.Insert row in employee table using Triggers. Every trigger is created with name any trigger have same name must be
+    replaced by new name. These triggers can raised before insert, update or delete rows on data base. The main difference
+    between a trigger and a stored procedure is that the former is attached to a table and is only fired when an INSERT,
+    UPDATE or DELETEoccurs.
+    4. Convert employee name into uppercase whenever an employee record is inserted or updated. Trigger to fire
+    before the insert or update.
+    5. Trigger before deleting a record from emp table. Trigger will insert the row to be deleted into table called
+    delete _emp and also record user who has deleted the record and date and time of delete.
+    6. Create a transparent audit system for a table CUST_MSTR. The system must keep track of the records that are
+    being deleted or updated
+
+1)
+CREATE OR REPLACE TRIGGER display_salary_difference
+AFTER INSERT OR UPDATE OR DELETE ON customers
+FOR EACH ROW
+DECLARE
+    old_salary NUMBER;
+    new_salary NUMBER;
+BEGIN
+    IF INSERTING OR UPDATING THEN
+        old_salary := NVL(:OLD.salary, 0);
+        new_salary := NVL(:NEW.salary, 0);
+        DBMS_OUTPUT.PUT_LINE('Salary Difference: ' || (new_salary - old_salary));
+    ELSIF DELETING THEN
+        old_salary := NVL(:OLD.salary, 0);
+        DBMS_OUTPUT.PUT_LINE('Salary Difference: ' || -old_salary);
+    END IF;
+END;
+/
+
+2)
+
+CREATE OR REPLACE TRIGGER passanger_insert_trigger 
+AFTER INSERT ON passenger
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Inserting a new passanger:' || :NEW.name);
+END;
+/
+
+CREATE OR REPLACE TRIGGER passanger_update_trigger 
+AFTER UPDATE ON passenger
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Updating passanger:'|| :OLD.name || '-->' || :NEW.name);
+END;
+/
+
+CREATE OR REPLACE TRIGGER passanger_delete_trigger 
+AFTER DELETE ON passenger
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Deleting passanger:' || :OLD.name);
+END;
+/
+
+3)
+-- Sample Employee table
+CREATE TABLE Employee (
+    Employee_ID NUMBER PRIMARY KEY,
+    First_Name VARCHAR2(50),
+    Last_Name VARCHAR2(50),
+    Salary NUMBER
+);
+
+-- BEFORE INSERT trigger
+CREATE OR REPLACE TRIGGER before_insert_employee
+BEFORE INSERT ON Employee
+FOR EACH ROW
+BEGIN
+    :NEW.First_Name := UPPER(:NEW.First_Name); -- Convert first name to uppercase before insert
+    :NEW.Last_Name := UPPER(:NEW.Last_Name);   -- Convert last name to uppercase before insert
+END;
+/
+
+-- BEFORE UPDATE trigger
+CREATE OR REPLACE TRIGGER before_update_employee
+BEFORE UPDATE ON Employee
+FOR EACH ROW
+BEGIN
+    :NEW.First_Name := UPPER(:NEW.First_Name); -- Convert first name to uppercase before update
+    :NEW.Last_Name := UPPER(:NEW.Last_Name);   -- Convert last name to uppercase before update
+END;
+/
+
+-- BEFORE DELETE trigger
+CREATE OR REPLACE TRIGGER before_delete_employee
+BEFORE DELETE ON Employee
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Deleting employee with ID ' || :OLD.Employee_ID);
+END;
+/
+
+5)
+CREATE TABLE delete_emp (
+    emp_id NUMBER,
+    emp_name VARCHAR2(50),
+    emp_salary NUMBER,
+    delete_user VARCHAR2(50),
+    delete_date TIMESTAMP
+);
+
+CREATE OR REPLACE TRIGGER before_delete_emp
+BEFORE DELETE ON emp
+FOR EACH ROW
+DECLARE
+    v_delete_user VARCHAR2(50) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+BEGIN
+    INSERT INTO delete_emp (emp_id, emp_name, emp_salary, delete_user, delete_date)
+    VALUES (:OLD.emp_no, :OLD.emp_name, :OLD.basic, v_delete_user, SYSTIMESTAMP);
+END;
+/
+
+6)
+CREATE TABLE CUST_MSTR (
+    cust_id NUMBER PRIMARY KEY,
+    cust_name VARCHAR2(100),
+    cust_address VARCHAR2(200),
+    cust_phone VARCHAR2(20)
+);
+
+CREATE TABLE CUST_AUDIT_LOG (
+    log_id NUMBER PRIMARY KEY,
+    event_type VARCHAR2(10),
+    cust_id NUMBER,
+    cust_name VARCHAR2(100),
+    cust_address VARCHAR2(200),
+    cust_phone VARCHAR2(20),
+    event_timestamp TIMESTAMP,
+    user_id VARCHAR2(50)
+);
+CREATE OR REPLACE TRIGGER cust_delete_trigger
+BEFORE DELETE ON CUST_MSTR
+FOR EACH ROW
+DECLARE
+    v_user_id VARCHAR2(50) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+BEGIN
+    INSERT INTO CUST_AUDIT_LOG (log_id, event_type, cust_id, cust_name, cust_address, cust_phone, event_timestamp, user_id)
+    VALUES (NULL, 'DELETE', :OLD.cust_id, :OLD.cust_name, :OLD.cust_address, :OLD.cust_phone, SYSTIMESTAMP, v_user_id);
+END;
+/
+CREATE OR REPLACE TRIGGER cust_update_trigger
+BEFORE UPDATE ON CUST_MSTR
+FOR EACH ROW
+DECLARE
+    v_user_id VARCHAR2(50) := SYS_CONTEXT('USERENV', 'SESSION_USER');
+BEGIN
+    INSERT INTO CUST_AUDIT_LOG (log_id, event_type, cust_id, cust_name, cust_address, cust_phone, event_timestamp, user_id)
+    VALUES (NULL, 'UPDATE', :OLD.cust_id, :OLD.cust_name, :OLD.cust_address, :OLD.cust_phone, SYSTIMESTAMP, v_user_id);
+END;
+/
+
+**Week – 8: CURSORS**
+    1. Write a PL/SQL block that will display the name, dept no, salary of fist highest paidemployees.
+    2. Update the balance stock in the item master table each time a transaction takes place in the item transaction
+    table. The change in item master table depends on the item id is already present in the item master then update
+    operation is performed to decrease the balance stock by the quantity specified in the item transaction in case
+    the item id is not present in the item master table then the record is inserted in the item mastertable.
+    3. Write a PL/SQL block that will display the employee details along with salary using cursors.
+    4. To write a Cursor to display the list of employees who are working as a Managers orAnalyst.
+    5. To write a Cursor to find employee with given job and deptno.
+    6. Write a PL/SQL block using implicit cursor that will display message, the salaries of all the employees in the
+    „employee‟ table are updated. If none of the employee‟s salary are updated we get a message 'None of the
+    salaries were updated'. Else we get a message like for example, 'Salaries for 1000 employees are updated' if
+    there are 1000 rows in „employee‟ table.
+
+1)
+DECLARE
+    -- Variables to store employee details
+    v_name employees.first_name%TYPE;
+    v_dept_no employees.department_id%TYPE;
+    v_salary employees.salary%TYPE;
+
+    -- Cursor to fetch the highest-paid employees
+    CURSOR highest_paid_cur IS
+        SELECT first_name, department_id, salary
+        FROM employees
+        ORDER BY salary DESC;
+
+    -- Counter variable to track the first highest-paid employee
+    v_counter NUMBER := 0;
+
+BEGIN
+    -- Open the cursor
+    OPEN highest_paid_cur;
+
+    -- Loop through the cursor to find the first highest-paid employee
+    LOOP
+        FETCH highest_paid_cur INTO v_name, v_dept_no, v_salary;
+        EXIT WHEN highest_paid_cur%NOTFOUND;
+
+        -- Increment the counter
+        v_counter := v_counter + 1;
+
+        -- Display the details of the first highest-paid employee
+        IF v_counter = 1 THEN
+            DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+            DBMS_OUTPUT.PUT_LINE('Department Number: ' || v_dept_no);
+            DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+        END IF;
+    END LOOP;
+
+    -- Close the cursor
+    CLOSE highest_paid_cur;
+END;
+/
+
+2)
+DECLARE
+    v_item_id item_master.item_id%TYPE;
+    v_quantity item_transaction.quantity%TYPE;
+BEGIN
+    -- Loop through the item transactions table
+    FOR trans_rec IN (SELECT item_id, quantity FROM item_transaction) LOOP
+        v_item_id := trans_rec.item_id;
+        v_quantity := trans_rec.quantity;
+
+        -- Check if the item exists in the item master table
+        -- If it exists, perform an update to decrease the balance stock
+        -- If it does not exist, perform an insert to add the item to the item master table
+        MERGE INTO item_master im
+        USING (SELECT v_item_id AS item_id FROM dual) src
+        ON (im.item_id = src.item_id)
+        WHEN MATCHED THEN
+            UPDATE SET im.balance_stock = im.balance_stock - v_quantity
+        WHEN NOT MATCHED THEN
+            INSERT (item_id, balance_stock)
+            VALUES (v_item_id, -v_quantity);
+    END LOOP;
+
+    -- Commit the changes
+    COMMIT;
+END;
+/
+3)
+CREATE TABLE Employee (
+    Employee_ID NUMBER PRIMARY KEY,
+    First_Name VARCHAR2(50),
+    Last_Name VARCHAR2(50),
+    Salary NUMBER
+);
+
+DECLARE
+    -- Declare variables to hold employee details
+    v_employee_id Employee.Employee_ID%TYPE;
+    v_first_name Employee.First_Name%TYPE;
+    v_last_name Employee.Last_Name%TYPE;
+    v_salary Employee.Salary%TYPE;
+
+    -- Declare the cursor to select employee details
+    CURSOR employee_cursor IS
+        SELECT Employee_ID, First_Name, Last_Name, Salary
+        FROM Employee;
+
+BEGIN
+    -- Open the cursor
+    OPEN employee_cursor;
+
+    -- Loop through the cursor to fetch employee details
+    LOOP
+        FETCH employee_cursor INTO v_employee_id, v_first_name, v_last_name, v_salary;
+        EXIT WHEN employee_cursor%NOTFOUND;
+
+        -- Display the employee details with salary
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+        DBMS_OUTPUT.PUT_LINE('---------------------------');
+    END LOOP;
+
+    -- Close the cursor
+    CLOSE employee_cursor;
+END;
+/
+
+4)
+DECLARE
+    -- Declare variables to hold employee details
+    v_employee_id Employee.Employee_ID%TYPE;
+    v_first_name Employee.First_Name%TYPE;
+    v_last_name Employee.Last_Name%TYPE;
+    v_job_title Employee.Job_Title%TYPE;
+
+    -- Declare the cursor to select employees who are Managers or Analysts
+    CURSOR employee_cursor IS
+        SELECT Employee_ID, First_Name, Last_Name, Job_Title
+        FROM Employee
+        WHERE Job_Title IN ('Manager', 'Analyst');
+
+BEGIN
+    -- Open the cursor
+    OPEN employee_cursor;
+
+    -- Loop through the cursor to fetch employee details
+    LOOP
+        FETCH employee_cursor INTO v_employee_id, v_first_name, v_last_name, v_job_title;
+        EXIT WHEN employee_cursor%NOTFOUND;
+
+        -- Display the employee details
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Job Title: ' || v_job_title);
+        DBMS_OUTPUT.PUT_LINE('---------------------------');
+    END LOOP;
+
+    -- Close the cursor
+    CLOSE employee_cursor;
+END;
+/
+
+5)
+DECLARE
+    -- Declare variables to hold employee details
+    v_employee_id Employee.Employee_ID%TYPE;
+    v_first_name Employee.First_Name%TYPE;
+    v_last_name Employee.Last_Name%TYPE;
+    v_job_title Employee.Job_Title%TYPE;
+    v_department_no Employee.Deptno%TYPE;
+
+    -- Declare the cursor to find employees with the given job and deptno
+    CURSOR employee_cursor(p_job_title IN Employee.Job_Title%TYPE, p_deptno IN Employee.Deptno%TYPE) IS
+        SELECT Employee_ID, First_Name, Last_Name, Job_Title, Deptno
+        FROM Employee
+        WHERE Job_Title = p_job_title AND Deptno = p_deptno;
+
+BEGIN
+    -- Call the cursor with the provided job title and department number (deptno)
+    OPEN employee_cursor('Manager', 10); -- Replace 'Manager' and 10 with desired values
+
+    -- Loop through the cursor to fetch employee details
+    LOOP
+        FETCH employee_cursor INTO v_employee_id, v_first_name, v_last_name, v_job_title, v_department_no;
+        EXIT WHEN employee_cursor%NOTFOUND;
+
+        -- Display the employee details
+        DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_employee_id);
+        DBMS_OUTPUT.PUT_LINE('First Name: ' || v_first_name);
+        DBMS_OUTPUT.PUT_LINE('Last Name: ' || v_last_name);
+        DBMS_OUTPUT.PUT_LINE('Job Title: ' || v_job_title);
+        DBMS_OUTPUT.PUT_LINE('Department Number: ' || v_department_no);
+        DBMS_OUTPUT.PUT_LINE('---------------------------');
+    END LOOP;
+
+    -- Close the cursor
+    CLOSE employee_cursor;
+END;
+/
+
+6)
+DECLARE
+    v_updated_count NUMBER := 0;
+
+BEGIN
+    -- Perform the salary update operation on the employee table
+    UPDATE employee
+    SET salary = salary * 1.1; -- 10% salary increase as an example
+
+    -- Get the number of rows updated
+    v_updated_count := SQL%ROWCOUNT;
+
+    -- Display appropriate message based on the number of rows updated
+    IF v_updated_count = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('None of the salaries were updated.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Salaries for ' || v_updated_count || ' employees are updated.');
+    END IF;
+
+    -- Commit the changes
+    COMMIT;
+END;
+/
+
